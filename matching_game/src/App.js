@@ -17,10 +17,10 @@ function App() {
   const dog = test();
   return (
     <>
-    <Paper elevation={0} />
     <div className="App" >
     <h3 style = {classes.test}>Matching Game</h3>
     </div>
+    
     </>
   );
 }
