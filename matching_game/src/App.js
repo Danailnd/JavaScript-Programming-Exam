@@ -1,11 +1,12 @@
 import './App.css';
 import test from './custom_modules/test.js';
+import Paper from '@material-ui/core/Paper';
 
 
 
-  const test1 = {
-    backgroundColor: 'red',
-    fontSize: 33
+  const classes = {
+    test : {
+    fontSize: 33},
   }
 
  
@@ -15,9 +16,12 @@ import test from './custom_modules/test.js';
 function App() {
   const dog = test();
   return (
-    <div>
-    <h3 style = {test1}>Matching Game</h3>
+    <>
+    <Paper elevation={0} />
+    <div className="App" >
+    <h3 style = {classes.test}>Matching Game</h3>
     </div>
+    </>
   );
 }
 
