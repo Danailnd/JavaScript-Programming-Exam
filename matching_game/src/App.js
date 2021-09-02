@@ -1,14 +1,15 @@
 import './App.css';
-import game_setup from './custom_modules/game_setup.jsx';
-import Paper from '@material-ui/core/Paper';
+
+import MainComponent from './custom_modules/mainComponent';
+
+
 
 function App() {
+
   return (
     <>
     <h3 className="Header">Matching Game</h3>
-    <div className="container">
-
-    </div>
+    <MainComponent/>
     </>
   );
 }
