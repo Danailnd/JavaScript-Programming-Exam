@@ -1,6 +1,6 @@
 import './App.css';
 
-import MainComponent from './custom_modules/mainComponent';
+import MainComponent from './my_work/mainComponent';
 
 
 
