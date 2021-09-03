@@ -6,12 +6,11 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import fieldMapGenerator from './fieldMapGenerator.js';
-// import { Container, Row, Col } from 'reactstrap';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './main.css';
 import { Button } from '@material-ui/core';
@@ -21,9 +20,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia'
-
-// import test1 from './images/test1.jpg';
   
+import CardsComponent from './CardsComponent.jsx';
   
 
 export default function MainComponent(){
@@ -36,13 +34,37 @@ export default function MainComponent(){
   const [fieldSize, setFieldSize] = useState("small");
   const [cardSet, setCardSet] = useState("dogs");
   const [playerCount, setPlayerCount] = useState("2");
+  const [showArr,setShowArr] = useState([0,0,0,0]);
  
   const[click,setClick] = useState(false);
 
-  function handleClickTest(){
-      console.log("Hiiiiiiii");
-      setClick(!click);
+  const test1 = "2";
+  const testArr = [2,1,1,2]
+
+  // function handleClickTest(){
+  //     console.log(`${process.env.PUBLIC_URL}/assets/images/${cardSet}/${test1+'.jpg'}`);
+  //     setClick(!click);
+  // }
+
+  function handleCardClick(cardId){
+    let tempArr = showArr;
+    if (tempArr[cardId] === 0){
+      tempArr[cardId] = 1;
+      setShowArr(tempArr);
+      console.log(showArr);
+    }
   }
+
+  function setCardImage(cardId){
+    if(showArr[cardId] === 1){
+      return(`${
+        process.env.PUBLIC_URL
+    }/assets/images/${cardSet}/${
+        testArr[cardId] + ".jpg"
+    }`);
+    }else{ return(`${process.env.PUBLIC_URL}/assets/images/background.jpg`)}
+  }
+
   return(
     <>
     <div className="Container">
@@ -172,8 +194,10 @@ export default function MainComponent(){
     )}
     {!startup &&(
         <>
-        <Grid container spacing={5}>
-         <Grid item xs={6} sm={3}>
+          <CardsComponent
+            cardSet ={cardSet}
+          />
+         {/* <Grid item xs={6} sm={3}>
        <Card className="Card">
       <CardActionArea
        onClick = {()=>{handleClickTest()}}
@@ -181,7 +205,7 @@ export default function MainComponent(){
         <CardMedia
           component="img"
           height="140"
-          image={click?`${process.env.PUBLIC_URL}/assets/images/dog.jpg`: `${process.env.PUBLIC_URL}/assets/images/background.jpg`}
+          image={click?`${process.env.PUBLIC_URL}/assets/images/${cardSet}/${test1+'.jpg'}`: `${process.env.PUBLIC_URL}/assets/images/background.jpg`}
         />
       </CardActionArea>
     </Card>
@@ -192,31 +216,7 @@ export default function MainComponent(){
         <CardMedia
           component="img"
           height="140"
-          image={click?`${process.env.PUBLIC_URL}/assets/images/dog.jpg`: `${process.env.PUBLIC_URL}/assets/images/background.jpg`}
-        />
-      </CardActionArea>
-    </Card>
-    </Grid>
-    <Grid item xs={6} sm={3}>
-       <Card className="Card">
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
-        />
-      </CardActionArea>
-    </Card>
-    </Grid>
-    </Grid>
-    <Grid container spacing={5}>
-         <Grid item xs={6} sm={3}>
-       <Card className="Card">
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
+          image={click?`${process.env.PUBLIC_URL}/assets/images/${cardSet}/${test1+'.jpg'}`: `${process.env.PUBLIC_URL}/assets/images/background.jpg`}
         />
       </CardActionArea>
     </Card>
@@ -234,86 +234,17 @@ export default function MainComponent(){
     </Grid>
     <Grid item xs={6} sm={3}>
        <Card className="Card">
-      <CardActionArea>
+      <CardActionArea
+       onClick = {()=>{handleClickTest()}}
+      >
         <CardMedia
           component="img"
           height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
+          image={click?`${process.env.PUBLIC_URL}/assets/images/${cardSet}/${test1+'.jpg'}`: `${process.env.PUBLIC_URL}/assets/images/background.jpg`}
         />
       </CardActionArea>
     </Card>
-    </Grid>
-    </Grid>
-    <Grid container spacing={5}>
-         <Grid item xs={6} sm={3}>
-       <Card className="Card">
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
-        />
-      </CardActionArea>
-    </Card>
-    </Grid>
-    <Grid item xs={6} sm={3}>
-       <Card className="Card">
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
-        />
-      </CardActionArea>
-    </Card>
-    </Grid>
-    <Grid item xs={6} sm={3}>
-       <Card className="Card">
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
-        />
-      </CardActionArea>
-    </Card>
-    </Grid>
-    </Grid>
-    <Grid container spacing={5}>
-         <Grid item xs={6} sm={3}>
-       <Card className="Card">
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
-        />
-      </CardActionArea>
-    </Card>
-    </Grid>
-    <Grid item xs={6} sm={3}>
-       <Card className="Card">
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
-        />
-      </CardActionArea>
-    </Card>
-    </Grid>
-    <Grid item xs={6} sm={3}>
-       <Card className="Card">
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={`${process.env.PUBLIC_URL}/assets/images/background.jpg`}
-        />
-      </CardActionArea>
-    </Card>
-    </Grid>
-    </Grid>
+    </Grid> */}
         </>
     )}
     </div>
