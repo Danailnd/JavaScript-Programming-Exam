@@ -8,7 +8,6 @@ function App() {
 
   return (
     <>
-    <h3 className="Header">Matching Game</h3>
     <MainComponent/>
     </>
   );
