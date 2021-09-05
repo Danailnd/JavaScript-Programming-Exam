@@ -5,3 +5,6 @@
 - Type `npm start` to start the server
 - type `localhost:3000` in the browser (if it hasn't appeared automatically)
 - enjoy :)
+
+### Notes
+The project uses React.js and some of the react specific libraries including `@material-ui`
