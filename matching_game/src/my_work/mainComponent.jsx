@@ -26,9 +26,8 @@ export default function MainComponent() {
 
     //Ingame Variables
 
-    const [showArr, setShowArr] = useState([false, false, false, false]);
+    const [showArr, setShowArr] = useState([]);
     const [deletedArr, setDeletedArr] = useState([]);
-    const testArr = [2, 1, 1, 2];
     const [click, setClick] = useState(0);
     const [currentPlayer, setCurrentPlayer] = useState(0);
 
@@ -69,13 +68,12 @@ export default function MainComponent() {
             }
         }
         winners.current = arr;
-        console.log(winners.current);
     }
 
     function handleCardClick(cardId) {
-        if (clickBlock.current === false) {
+        if (clickBlock.current === false && showArr[cardId] === false) {
             let tempArr = [...showArr];
-            tempArr[cardId] = !tempArr[cardId];
+            tempArr[cardId] = true;
             setShowArr(tempArr);
             setClick((click + 1) % 2);
             if (click === 1) {
@@ -93,7 +91,7 @@ export default function MainComponent() {
                     __temporary.push(i);
                 }
             }
-            if (testArr[__temporary[0]] === testArr[__temporary[1]]) {
+            if (mapArray.current[__temporary[0]] === mapArray.current[__temporary[1]]) {
                 __deletedArr[__temporary[0]] = false;
                 __deletedArr[__temporary[1]] = false;
                 setDeletedArr(__deletedArr);
@@ -101,13 +99,12 @@ export default function MainComponent() {
             }
             setCurrentPlayer((currentPlayer + 1) % playerCount);
             clickBlock.current = false;
-            setShowArr([false, false, false, false]);
+            setShowArr(showArrBuild());
         }, 1000);
     }
 
     useEffect(() => {
         if (deletedArr.length !== 0 && deletedArr.indexOf(true) === -1) {
-            console.log("YOU WIN!");
             determineWinners();
             setEnd(true);
         }
@@ -229,9 +226,10 @@ export default function MainComponent() {
                             style={{ marginTop: "70px", marginLeft: "100px", minWidth: "400px" }}
                             onClick={() => {
                                 // setDeletedArr(deleteArrBuild());
-                                setDeletedArr([true,true,true,true]);
+                                setDeletedArr(deleteArrBuild());
                                 setShowArr(showArrBuild());
                                 score.current = scoreBuild();
+                                setCurrentPlayer(0);
                                 mapArray.current = fieldMapGenerator(parseInt(fieldSize));
                                 setStartup(false);}}
                         >
@@ -257,7 +255,7 @@ export default function MainComponent() {
                                                         ? `${
                                                               process.env.PUBLIC_URL
                                                           }/assets/images/${cardSet}/${
-                                                              testArr[0] + ".jpg"
+                                                            mapArray.current[0] + ".jpg"
                                                           }`
                                                         : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
                                                 }
@@ -281,7 +279,7 @@ export default function MainComponent() {
                                                         ? `${
                                                               process.env.PUBLIC_URL
                                                           }/assets/images/${cardSet}/${
-                                                              testArr[1] + ".jpg"
+                                                            mapArray.current[1] + ".jpg"
                                                           }`
                                                         : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
                                                 }
@@ -305,7 +303,7 @@ export default function MainComponent() {
                                                         ? `${
                                                               process.env.PUBLIC_URL
                                                           }/assets/images/${cardSet}/${
-                                                              testArr[2] + ".jpg"
+                                                              mapArray.current[2] + ".jpg"
                                                           }`
                                                         : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
                                                 }
@@ -329,7 +327,7 @@ export default function MainComponent() {
                                                         ? `${
                                                               process.env.PUBLIC_URL
                                                           }/assets/images/${cardSet}/${
-                                                              testArr[3] + ".jpg"
+                                                            mapArray.current[3] + ".jpg"
                                                           }`
                                                         : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
                                                 }
@@ -339,6 +337,398 @@ export default function MainComponent() {
                                 )}
                             </Grid>
                         </Grid>
+                        <Grid container spacing={5}>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[4] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(4);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[4]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[4] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[5] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(5);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[5]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[5] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[6] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(6);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[6]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                              mapArray.current[6] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[7] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(7);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[7]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[7] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={5}>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[8] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(8);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[8]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[8] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[9] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(9);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[9]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[9] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[10] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(10);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[10]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                              mapArray.current[10] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[11] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(11);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[11]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[11] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                        </Grid>
+                        {(fieldSize === "16"||fieldSize=== "20")&&(<Grid container spacing={5}>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[12] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(12);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[12]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[12] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[13] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(13);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[13]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[13] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[14] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(14);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[14]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                              mapArray.current[14] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[15] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(15);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[15]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[15] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                        </Grid>)}
+                        {fieldSize === "20"&&(<Grid container spacing={5}>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[16] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(16);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[16]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[16] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[17] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(17);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[17]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[17] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[18] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(18);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[18]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                              mapArray.current[18] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                {deletedArr[19] && (
+                                    <Card className="Card">
+                                        <CardActionArea>
+                                            <CardMedia
+                                                onClick={() => {
+                                                    handleCardClick(19);
+                                                }}
+                                                component="img"
+                                                height="140"
+                                                image={
+                                                    showArr[19]
+                                                        ? `${
+                                                              process.env.PUBLIC_URL
+                                                          }/assets/images/${cardSet}/${
+                                                            mapArray.current[19] + ".jpg"
+                                                          }`
+                                                        : `${process.env.PUBLIC_URL}/assets/images/background.jpg`
+                                                }
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                )}
+                            </Grid>
+                        </Grid>)}
                     </>
                 )}
                 {end && (
@@ -368,7 +758,7 @@ export default function MainComponent() {
                             Everybody
                             </h1> 
                     )}  
-                    <h1 className = "endingCongratulations">wins</h1>
+                    {winners.current.length === 1?(<h1 className = "endingCongratulations">wins</h1>):(<h1 className = "endingCongratulations">win</h1>)}
                     <Button
                             color="secondary"
                             variant="contained"

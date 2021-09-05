@@ -6,7 +6,7 @@ export default function fieldMapGenerator(fieldSize){
     let arr = [];
 let realArr = [];
 let random;
-for (let i = 0; i < 12; i++) {
+for (let i = 0; i < fieldSize; i++) {
   do {
     random = getRandomInt(fieldSize) + 1;
   } while (arr.includes(random));
